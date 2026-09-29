@@ -5,7 +5,7 @@ import { Trash2, Leaf, Droplet, ArrowRight, ShieldCheck } from "lucide-react";
 export function WasteStorage() {
   return (
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 pb-12">
-      <h1 className="text-2xl font-black text-white uppercase tracking-wider flex items-center gap-3">
+      <h1 className="text-2xl font-black text-[#1f3025] uppercase tracking-wider flex items-center gap-3">
         <Trash2 className="text-[#ff3399]" /> Waste Storage & Disposal
       </h1>
       

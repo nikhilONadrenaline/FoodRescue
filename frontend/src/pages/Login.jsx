@@ -57,8 +57,8 @@ export function Login() {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 flex items-center justify-center p-4 md:p-8 w-full max-w-5xl mx-auto">
-          <div className="w-full bg-[#27272a]/30 rounded-3xl overflow-hidden border border-[#333] shadow-2xl flex flex-col md:flex-row min-h-[650px]">
+        <main className="flex-1 flex items-center justify-center p-4 md:p-8 w-full max-w-6xl mx-auto">
+          <div className="w-full bg-[#27272a]/30 rounded-3xl overflow-hidden border border-[#333] shadow-2xl flex flex-col md:flex-row min-h-[700px]">
 
             {/* Left Pane (Login Form) */}
             <GlowHover
@@ -182,20 +182,21 @@ export function Login() {
               glowIntensity={0.15}
               items={[
                 {
-                  id: "login-illustration-pane",
+                  id: "login-illustration-bg",
                   theme: { hue: 45, saturation: 60, lightness: 90 },
-                  element: (
-                    <div className="w-full h-full bg-[#fbf5ee] relative border-l border-white/5 flex items-center justify-center overflow-hidden">
-                      <img 
-                        src="/login-illustration.png" 
-                        alt="FoodRescue Good Food. Brighter Tomorrows." 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )
+                  element: <div className="w-full h-full bg-[#fbf5ee] relative border-l border-white/5" />
                 }
               ]}
-            />
+            >
+              <div className="w-full h-full flex items-center justify-center overflow-hidden relative z-10 pointer-events-none">
+                <img 
+                  src="/login-illustration.jpg" 
+                  alt="FoodRescue Good Food. Brighter Tomorrows." 
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </GlowHover>
+
 
           </div>
         </main>

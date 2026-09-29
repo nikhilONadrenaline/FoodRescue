@@ -6,7 +6,7 @@ export function SurplusManagement() {
   const [isViewingRequests, setIsViewingRequests] = useState(false);
   return (
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 pb-12">
-      <h1 className="text-2xl font-black text-white uppercase tracking-wider">Surplus & NGO Network</h1>
+      <h1 className="text-2xl font-black text-[#1f3025] uppercase tracking-wider">Surplus & NGO Network</h1>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
