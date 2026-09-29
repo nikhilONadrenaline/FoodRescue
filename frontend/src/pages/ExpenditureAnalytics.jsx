@@ -228,7 +228,7 @@ export function ExpenditureAnalytics() {
                     <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-6">Current Monthly Expense: {selectedItem.price}</p>
                     
                     <div className="flex-1 w-full dark text-white pb-6 h-[250px]">
-                       <LineChart data={itemChartData} xDataKey="period">
+                       <LineChart data={itemChartData} xDataKey="period" yDomainTween={false}>
                          <Grid horizontal />
                          <Line dataKey="actual" stroke="var(--chart-line-primary)" />
                          <Line dataKey="predicted" stroke="var(--chart-line-secondary)" />
@@ -284,6 +284,68 @@ export function ExpenditureAnalytics() {
                 </div>
               );
             })}
+          </div>
+          {/* Donation History Section */}
+          <div className="bg-[#1f3025] border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-[#4caf50]/30 transition-colors mt-2">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#4caf50]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            
+            <h2 className="text-white/80 text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-8 relative z-10">
+              <Heart size={18} className="text-[#4caf50]" /> Donation & Redistribution History
+            </h2>
+            
+            <div className="overflow-x-auto relative z-10">
+              <table className="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Food Donated</th>
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Recipient</th>
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Date/Time</th>
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Method</th>
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Status</th>
+                    <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold text-right whitespace-nowrap">Value Recovered</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {donationHistoryData.map((donation) => (
+                    <tr key={donation.id} className="border-b border-white/10/50 hover:bg-[#2a3d31] transition-colors group/row">
+                      <td className="py-4 px-4 whitespace-nowrap">
+                        <div className="flex flex-col">
+                          <span className="text-white font-bold text-sm">{donation.foodDonated}</span>
+                          <span className="text-[#b9e7aa] text-xs font-black">{donation.quantity}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <MapPin size={12} className="text-[#ff3399]" />
+                          <span className="text-white/80 text-sm">{donation.recipient}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          <Calendar size={12} className="text-white/60" />
+                          <span className="text-white/60 text-xs">{donation.dateTime}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 whitespace-nowrap">
+                        <div className="flex items-center gap-2">
+                          {donation.method === "Delivery" ? <Truck size={12} className="text-[#b9e7aa]-deep" /> : <Package size={12} className="text-[#b9e7aa]" />}
+                          <span className="text-white/80 text-xs uppercase tracking-wider font-bold">{donation.method}</span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 whitespace-nowrap">
+                        <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full w-max text-[10px] font-bold uppercase tracking-widest ${donation.status === "Completed" ? "bg-green-500/10 text-green-500 border border-green-500/20" : "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"}`}>
+                          {donation.status === "Completed" ? <CheckCircle size={10} /> : <Clock size={10} />}
+                          {donation.status}
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 text-right whitespace-nowrap">
+                        <span className="text-lg font-black text-[#4caf50]">₹{donation.valueRecovered.toLocaleString()}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
         </div>
@@ -431,75 +493,6 @@ export function ExpenditureAnalytics() {
         </div>
       )}
 
-      {/* Donation History Section (Always Visible at bottom) */}
-      <div className="bg-[#1f3025] border border-white/10 rounded-3xl p-8 shadow-2xl relative overflow-hidden group hover:border-[#4caf50]/30 transition-colors mt-8">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4caf50]/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-        
-        <h2 className="text-white/80 text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-8 relative z-10">
-          <Heart size={18} className="text-[#4caf50]" /> Donation & Redistribution History
-        </h2>
-        
-        <div className="overflow-x-auto relative z-10">
-          <table className="w-full text-left border-collapse min-w-[900px]">
-            <thead>
-              <tr className="border-b border-white/10">
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Food Donated</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Recipient</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Date/Time</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Method</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold whitespace-nowrap">Status</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold text-right whitespace-nowrap">Value Recovered</th>
-                <th className="pb-4 px-4 text-[10px] uppercase tracking-widest text-white/60 font-bold text-right whitespace-nowrap">Beneficiaries</th>
-              </tr>
-            </thead>
-            <tbody>
-              {donationHistoryData.map((donation) => (
-                <tr key={donation.id} className="border-b border-white/10/50 hover:bg-[#2a3d31] transition-colors group/row">
-                  <td className="py-4 px-4 whitespace-nowrap">
-                    <div className="flex flex-col">
-                      <span className="text-white font-bold text-sm">{donation.foodDonated}</span>
-                      <span className="text-[#b9e7aa] text-xs font-black">{donation.quantity}</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      <MapPin size={12} className="text-[#ff3399]" />
-                      <span className="text-white/80 text-sm">{donation.recipient}</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={12} className="text-white/60" />
-                      <span className="text-white/60 text-xs">{donation.dateTime}</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      {donation.method === "Delivery" ? <Truck size={12} className="text-[#b9e7aa]-deep" /> : <Package size={12} className="text-[#b9e7aa]" />}
-                      <span className="text-white/80 text-xs uppercase tracking-wider font-bold">{donation.method}</span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4 whitespace-nowrap">
-                    <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full w-max text-[10px] font-bold uppercase tracking-widest ${donation.status === "Completed" ? "bg-green-500/10 text-green-500 border border-green-500/20" : "bg-yellow-500/10 text-yellow-500 border border-yellow-500/20"}`}>
-                      {donation.status === "Completed" ? <CheckCircle size={10} /> : <Clock size={10} />}
-                      {donation.status}
-                    </div>
-                  </td>
-                  <td className="py-4 px-4 text-right whitespace-nowrap">
-                    <span className="text-lg font-black text-[#4caf50]">₹{donation.valueRecovered.toLocaleString()}</span>
-                  </td>
-                  <td className="py-4 px-4 text-right whitespace-nowrap">
-                    <div className="flex items-center justify-end gap-1.5">
-                      <span className="text-lg font-black text-white">{donation.beneficiaries}</span>
-                      <Users size={14} className="text-[#b9e7aa]" />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { HeartPulse, Eye, Mail, Lock, AlertCircle } from "lucide-react";
 import { BackgroundGrid } from "../components/BackgroundGrid";
 import { useFoodRescue } from "../context/FoodRescueContext";
+import loginIllustration from "../assets/login-illustration.jpg";
 
 export function Login() {
   const [role, setRole] = useState("kitchen");
@@ -190,7 +191,7 @@ export function Login() {
             >
               <div className="w-full h-full flex items-center justify-center overflow-hidden relative z-10 pointer-events-none">
                 <img 
-                  src="/login-illustration.jpg" 
+                  src={loginIllustration} 
                   alt="FoodRescue Good Food. Brighter Tomorrows." 
                   className="w-full h-full object-contain"
                 />
