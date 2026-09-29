@@ -12,6 +12,7 @@ import { ExpenditureAnalytics } from './pages/ExpenditureAnalytics.jsx'
 import { SurplusManagement } from './pages/SurplusManagement.jsx'
 import { WasteStorage } from './pages/WasteStorage.jsx'
 import { MealPlanner } from './pages/MealPlanner.jsx'
+import { WasteManagement } from './pages/WasteManagement.jsx'
 import { FoodRescueProvider } from './context/FoodRescueContext.jsx'
 
 createRoot(document.getElementById('root')).render(
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="expenditure" element={<ExpenditureAnalytics />} />
             <Route path="surplus" element={<SurplusManagement />} />
             <Route path="waste-storage" element={<WasteStorage />} />
+            <Route path="waste-management" element={<WasteManagement />} />
           </Route>
         </Routes>
       </BrowserRouter>
