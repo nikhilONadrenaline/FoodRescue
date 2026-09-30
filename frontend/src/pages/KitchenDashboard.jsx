@@ -308,65 +308,67 @@ export function KitchenDashboard() {
       </div> {/* End Top Row */}
 
       {/* Full Width Bottom Row: AI Prediction vs Actual Tracker */}
-      <div className="w-full flex flex-col gap-6">
+      <div className="w-full flex flex-col gap-4">
         <h2 className="text-[#1f3025] text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-2">
           <Zap size={18} className="text-[#b9e7aa]" /> AI Demand Forecast Analysis
         </h2>
 
-        {aiPredictionPerItem.map(item => (
-          <div key={item.id} className="bg-[#1f3025] border border-white/10 rounded-2xl p-3 shadow-xl flex flex-col md:flex-row md:items-center relative overflow-hidden gap-4">
-            <div className="absolute top-0 right-0 md:right-auto md:left-1/2 p-2 opacity-5 text-[#b9e7aa] transform md:-translate-x-1/2 md:scale-110"><BrainCircuit size={60} /></div>
+        <div className="bg-[#1f3025] border border-white/10 rounded-3xl p-4 md:p-6 shadow-2xl flex flex-col gap-3">
+          {aiPredictionPerItem.map(item => (
+            <div key={item.id} className="bg-[#2a3d31] border border-white/5 rounded-xl p-2.5 flex flex-col md:flex-row md:items-center relative overflow-hidden gap-4 hover:bg-[#32483a] transition-colors">
+              <div className="absolute top-0 right-0 md:right-auto md:left-1/2 opacity-5 text-[#b9e7aa] transform md:-translate-x-1/2 md:scale-110"><BrainCircuit size={40} /></div>
 
-            {/* Left Side: Stats */}
-            <div className="flex-1 relative z-10 flex flex-col justify-center">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.2)]" style={{ backgroundColor: item.colorHex }}></div>
-                <h3 className="text-white font-black text-sm uppercase tracking-widest">{item.name}</h3>
-              </div>
-
-              <div className="flex justify-between items-center mb-1">
-                <div>
-                  <p className="text-[8px] text-white/60 uppercase tracking-widest font-bold mb-0.5">Prepared Food</p>
-                  <p className="text-xl font-black text-white">{item.actualPrepared} <span className="text-[10px] text-white/60">kg</span></p>
-                </div>
-                <div className="w-px h-6 bg-[#333] mx-2"></div>
-                <div className="text-right">
-                  <p className="text-[8px] text-[#b9e7aa]/60 uppercase tracking-widest font-bold mb-0.5">AI Predicted Demand</p>
-                  <p className="text-xl font-black text-[#b9e7aa]">{item.aiPredicted} <span className="text-[10px] text-[#b9e7aa]/50">kg</span></p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side: Funnel/Flow Visualization */}
-            <div className="flex-1 relative z-10">
-              <div className="bg-[#2a3d31] rounded-xl p-2 border border-white/10 h-full flex flex-col justify-center">
-                <div className="flex justify-between items-center mb-2 border-b border-white/10 pb-1.5">
-                  <span className="text-[8px] text-white/60 uppercase tracking-widest font-bold">Predicted Surplus (Buffer)</span>
-                  <span className="text-[#f1d85a] font-black text-sm">{item.predictedSurplus} kg</span>
+              {/* Left Side: Stats */}
+              <div className="flex-1 relative z-10 flex flex-col justify-center">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <div className="w-2 h-2 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.2)]" style={{ backgroundColor: item.colorHex }}></div>
+                  <h3 className="text-white font-black text-[11px] uppercase tracking-widest">{item.name}</h3>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  {/* NGO Split */}
-                  <div className="flex-1 bg-[#b9e7aa]/10 border border-theme-green/30 rounded-lg p-1.5 flex flex-col justify-center items-center group hover:bg-[#b9e7aa]/20 transition-colors">
-                    <PackageOpen size={12} className="text-[#b9e7aa] mb-1" />
-                    <span className="text-[7px] uppercase tracking-widest text-[#b9e7aa]/80 font-bold text-center leading-tight">To NGO Network</span>
-                    <span className="text-[#b9e7aa] font-black text-sm mt-0.5">{item.remainingFood} <span className="text-[8px]">kg</span></span>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="text-[7px] text-white/60 uppercase tracking-widest font-bold mb-0.5">Prepared Food</p>
+                    <p className="text-lg font-black text-white leading-none">{item.actualPrepared} <span className="text-[9px] text-white/60">kg</span></p>
                   </div>
-
-                  <ArrowRight size={12} className="text-[#333] shrink-0" />
-
-                  {/* Waste Split */}
-                  <div className="flex-1 bg-[#ff3399]/10 border border-[#ff3399]/30 rounded-lg p-1.5 flex flex-col justify-center items-center group hover:bg-[#ff3399]/20 transition-colors">
-                    <Recycle size={12} className="text-[#ff3399] mb-1" />
-                    <span className="text-[7px] uppercase tracking-widest text-[#ff3399]/80 font-bold text-center leading-tight">To Waste</span>
-                    <span className="text-[#ff3399] font-black text-sm mt-0.5">{item.actualWaste} <span className="text-[8px]">kg</span></span>
+                  <div className="w-px h-5 bg-[#444] mx-2"></div>
+                  <div className="text-right">
+                    <p className="text-[7px] text-[#b9e7aa]/60 uppercase tracking-widest font-bold mb-0.5">AI Predicted Demand</p>
+                    <p className="text-lg font-black text-[#b9e7aa] leading-none">{item.aiPredicted} <span className="text-[9px] text-[#b9e7aa]/50">kg</span></p>
                   </div>
                 </div>
               </div>
-            </div>
 
-          </div>
-        ))}
+              {/* Right Side: Funnel/Flow Visualization */}
+              <div className="flex-1 relative z-10">
+                <div className="bg-[#1f3025]/50 rounded-lg p-2 border border-white/5 h-full flex flex-col justify-center">
+                  <div className="flex justify-between items-center mb-1.5 border-b border-white/10 pb-1">
+                    <span className="text-[7px] text-white/60 uppercase tracking-widest font-bold">Predicted Surplus (Buffer)</span>
+                    <span className="text-[#f1d85a] font-black text-xs leading-none">{item.predictedSurplus} kg</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {/* NGO Split */}
+                    <div className="flex-1 bg-[#b9e7aa]/10 border border-theme-green/30 rounded-md p-1 flex flex-col justify-center items-center group hover:bg-[#b9e7aa]/20 transition-colors">
+                      <PackageOpen size={10} className="text-[#b9e7aa] mb-0.5" />
+                      <span className="text-[6px] uppercase tracking-widest text-[#b9e7aa]/80 font-bold text-center leading-tight">To NGO Network</span>
+                      <span className="text-[#b9e7aa] font-black text-xs mt-0.5 leading-none">{item.remainingFood} <span className="text-[7px]">kg</span></span>
+                    </div>
+
+                    <ArrowRight size={10} className="text-[#444] shrink-0" />
+
+                    {/* Waste Split */}
+                    <div className="flex-1 bg-[#ff3399]/10 border border-[#ff3399]/30 rounded-md p-1 flex flex-col justify-center items-center group hover:bg-[#ff3399]/20 transition-colors">
+                      <Recycle size={10} className="text-[#ff3399] mb-0.5" />
+                      <span className="text-[6px] uppercase tracking-widest text-[#ff3399]/80 font-bold text-center leading-tight">To Waste</span>
+                      <span className="text-[#ff3399] font-black text-xs mt-0.5 leading-none">{item.actualWaste} <span className="text-[7px]">kg</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Realtime Production Data (New Feature) */}

@@ -4,6 +4,8 @@ import { HeartHandshake, AlertCircle, MapPin, Truck, CheckCircle2, Clock, Star, 
 
 export function SurplusManagement() {
   const [isViewingRequests, setIsViewingRequests] = useState(false);
+  const [selectedSurplus, setSelectedSurplus] = useState(null);
+  const [postedSurplus, setPostedSurplus] = useState({});
   return (
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 pb-12">
       <h1 className="text-2xl font-black text-[#1f3025] uppercase tracking-wider">Surplus & NGO Network</h1>
@@ -35,8 +37,21 @@ export function SurplusManagement() {
                     <div className="flex items-center gap-2 text-[#f1d85a] text-xs font-bold">
                       <Clock size={14} /> Expires in: {alert.expiry}
                     </div>
-                    <button className="bg-[#ff3399] text-[#18181b] px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#ff3399]/90 transition-colors shadow-[0_0_15px_rgba(255,51,153,0.3)]">
-                      Post Surplus
+                    <button 
+                      onClick={() => {
+                        if (postedSurplus[idx]) {
+                          setSelectedSurplus(alert);
+                        } else {
+                          setPostedSurplus(prev => ({ ...prev, [idx]: true }));
+                        }
+                      }}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors ${
+                        postedSurplus[idx] 
+                          ? "bg-[#b9e7aa] text-[#1f3025] hover:bg-[#b9e7aa]/90 shadow-[0_0_15px_rgba(185,231,170,0.3)]" 
+                          : "bg-[#ff3399] text-[#18181b] hover:bg-[#ff3399]/90 shadow-[0_0_15px_rgba(255,51,153,0.3)]"
+                      }`}
+                    >
+                      {postedSurplus[idx] ? "View" : "Post Surplus"}
                     </button>
                   </div>
                 </div>
@@ -110,9 +125,8 @@ export function SurplusManagement() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-0.5">Requested</p>
-                        <p className="text-[#b9e7aa] font-black text-sm">{req.requestedFood}</p>
-                        <p className="text-[#f1d85a] font-bold text-xs">{req.quantity}</p>
+                        <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-0.5">Partnership</p>
+                        <p className="text-[#b9e7aa] font-black text-sm uppercase">Tie-up Request</p>
                       </div>
                     </div>
                     
@@ -132,6 +146,62 @@ export function SurplusManagement() {
         </div>
         
       </div>
+
+      {/* Post Surplus Modal */}
+      {selectedSurplus && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-[#1f3025] border border-white/10 rounded-3xl p-8 max-w-2xl w-full shadow-2xl flex flex-col gap-6 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-xl font-black text-white uppercase tracking-wider">Select NGO for Distribution</h2>
+                <p className="text-white/60 text-xs font-bold tracking-widest uppercase mt-1">
+                  Surplus: <span className="text-[#ff3399]">{selectedSurplus.item}</span> ({selectedSurplus.quantity})
+                </p>
+              </div>
+              <button 
+                onClick={() => setSelectedSurplus(null)}
+                className="p-2 bg-white/5 hover:bg-white/10 text-white rounded-xl transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-4">
+              {ngoNetworkData.map((ngo, idx) => (
+                <div key={idx} className="bg-[#2a3d31] border border-white/5 p-4 rounded-2xl flex items-center justify-between hover:border-[#b9e7aa]/50 transition-colors">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 bg-[#b9e7aa]/10 rounded-xl">
+                      <HeartHandshake size={20} className="text-[#b9e7aa]" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-sm tracking-wide">{ngo.name}</h3>
+                      <div className="flex items-center gap-3 mt-1">
+                        <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                          <MapPin size={10} /> {ngo.distance}
+                        </span>
+                        <span className="text-[#f1d85a] text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+                          <Star size={10} fill="#f1d85a" /> {ngo.rating}/5
+                        </span>
+                        <span className="text-[#b9e7aa]/60 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1 border-l border-white/20 pl-3">
+                          Demands: {selectedSurplus.item}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => {
+                      setSelectedSurplus(null);
+                    }}
+                    className="bg-[#b9e7aa] text-[#18181b] px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-[#b9e7aa]/90 transition-colors shadow-[0_0_10px_rgba(185,231,170,0.2)] flex items-center gap-2"
+                  >
+                    <Truck size={14} /> Send Food
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

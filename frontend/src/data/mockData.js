@@ -2,14 +2,14 @@
 
 // Used in KitchenDashboard (Pie Chart & Marquee)
 export const dashboardInventoryData = [
-  { id: "rice", name: "Rice", amount: "450 kg", percentage: 36, colorHex: "#00d0f0" },
-  { id: "wheat", name: "Wheat Flour", amount: "200 kg", percentage: 16, colorHex: "#ffc107" },
-  { id: "lentils", name: "Lentils", amount: "150 kg", percentage: 12, colorHex: "#ff3399" },
-  { id: "tomatoes", name: "Tomatoes", amount: "120 kg", percentage: 10, colorHex: "#4caf50" },
-  { id: "onions", name: "Onions", amount: "100 kg", percentage: 8, colorHex: "#ff9800" },
-  { id: "potatoes", name: "Potatoes", amount: "90 kg", percentage: 7, colorHex: "#795548" },
-  { id: "milk", name: "Milk", amount: "80 L", percentage: 7, colorHex: "#e0e0e0" },
-  { id: "meat", name: "Meat & Poultry", amount: "50 kg", percentage: 4, colorHex: "#9c27b0" },
+  { id: "meal1", name: "Oatmeal & Fruits", amount: "450 kg", percentage: 36, colorHex: "#00d0f0" },
+  { id: "meal2", name: "Grilled Chicken & Rice", amount: "200 kg", percentage: 16, colorHex: "#ffc107" },
+  { id: "meal3", name: "Vegetable Curry", amount: "150 kg", percentage: 12, colorHex: "#ff3399" },
+  { id: "meal4", name: "Pasta with Tomato Sauce", amount: "120 kg", percentage: 10, colorHex: "#4caf50" },
+  { id: "meal5", name: "Lentil Soup", amount: "100 kg", percentage: 8, colorHex: "#ff9800" },
+  { id: "meal6", name: "Beef Stew", amount: "90 kg", percentage: 7, colorHex: "#795548" },
+  { id: "meal7", name: "Pancakes", amount: "80 kg", percentage: 7, colorHex: "#e0e0e0" },
+  { id: "meal8", name: "Salad Bowl", amount: "50 kg", percentage: 4, colorHex: "#9c27b0" },
 ];
 
 // Used in InventoryManagement (Live Feed)
@@ -61,11 +61,11 @@ export const aiPredictionData = {
 };
 
 export const aiPredictionPerItem = [
-  { id: "rice", name: "Rice", actualPrepared: 150, aiPredicted: 130, predictedSurplus: 20, remainingFood: 15, actualWaste: 5, colorHex: "#00d0f0" },
-  { id: "wheat", name: "Wheat Flour", actualPrepared: 100, aiPredicted: 90, predictedSurplus: 10, remainingFood: 8, actualWaste: 2, colorHex: "#ffc107" },
-  { id: "lentils", name: "Lentils", actualPrepared: 80, aiPredicted: 75, predictedSurplus: 5, remainingFood: 5, actualWaste: 0, colorHex: "#ff3399" },
-  { id: "tomatoes", name: "Tomatoes", actualPrepared: 50, aiPredicted: 40, predictedSurplus: 10, remainingFood: 8, actualWaste: 2, colorHex: "#4caf50" },
-  { id: "onions", name: "Onions", actualPrepared: 60, aiPredicted: 55, predictedSurplus: 5, remainingFood: 4, actualWaste: 1, colorHex: "#ff9800" },
+  { id: "meal1", name: "Oatmeal & Fruits", actualPrepared: 150, aiPredicted: 130, predictedSurplus: 20, remainingFood: 15, actualWaste: 5, colorHex: "#00d0f0" },
+  { id: "meal2", name: "Grilled Chicken & Rice", actualPrepared: 100, aiPredicted: 90, predictedSurplus: 10, remainingFood: 8, actualWaste: 2, colorHex: "#ffc107" },
+  { id: "meal3", name: "Vegetable Curry", actualPrepared: 80, aiPredicted: 75, predictedSurplus: 5, remainingFood: 5, actualWaste: 0, colorHex: "#ff3399" },
+  { id: "meal4", name: "Pasta with Tomato Sauce", actualPrepared: 50, aiPredicted: 40, predictedSurplus: 10, remainingFood: 8, actualWaste: 2, colorHex: "#4caf50" },
+  { id: "meal5", name: "Lentil Soup", actualPrepared: 60, aiPredicted: 55, predictedSurplus: 5, remainingFood: 4, actualWaste: 1, colorHex: "#ff9800" },
 ];
 
 // To be used in WasteStorage page

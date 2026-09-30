@@ -21,6 +21,9 @@ export function MealPlanner() {
 
   const [activeSlot, setActiveSlot] = useState(null); // { day, mealType }
   const [editValue, setEditValue] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const [showIngredientsInput, setShowIngredientsInput] = useState(false);
+  const [newIngredient, setNewIngredient] = useState("");
 
   const handleSlotClick = (day, mealType) => {
     setActiveSlot({ day, mealType });
@@ -109,18 +112,68 @@ export function MealPlanner() {
                 </h3>
                 <p className="text-xs text-theme-green-deep uppercase tracking-widest font-black mt-1">{activeSlot.day}</p>
               </div>
-              <button onClick={() => setActiveSlot(null)} className="text-theme-ink hover:text-black transition-colors p-2 hover:bg-black/10 rounded-full">
+              <button 
+                onClick={() => {
+                  setActiveSlot(null);
+                  setShowIngredientsInput(false);
+                  setIngredients([]);
+                }} 
+                className="text-theme-ink hover:text-black transition-colors p-2 hover:bg-black/10 rounded-full"
+              >
                 <X size={24} strokeWidth={3} />
               </button>
             </div>
             
             <textarea
-              className="w-full bg-white border-2 border-black rounded-xl p-4 text-theme-ink font-bold focus:outline-none focus:ring-4 focus:ring-theme-green/30 transition-all resize-none mb-6 text-sm"
+              className="w-full bg-white border-2 border-black rounded-xl p-4 text-theme-ink font-bold focus:outline-none focus:ring-4 focus:ring-theme-green/30 transition-all resize-none mb-4 text-sm"
               rows={4}
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
               placeholder={`What's on the menu for ${activeSlot.mealType.toLowerCase()}?`}
             />
+            
+            {showIngredientsInput ? (
+              <div className="mb-6 bg-white border-2 border-black rounded-xl p-4">
+                <div className="flex gap-2 mb-4">
+                  <input
+                    type="text"
+                    value={newIngredient}
+                    onChange={(e) => setNewIngredient(e.target.value)}
+                    placeholder="e.g. 2kg Rice"
+                    className="flex-1 bg-gray-100 border-2 border-black rounded-lg px-3 py-2 text-sm font-bold focus:outline-none focus:border-theme-green"
+                  />
+                  <button 
+                    onClick={() => {
+                      if(newIngredient.trim()) {
+                        setIngredients([...ingredients, newIngredient.trim()]);
+                        setNewIngredient("");
+                      }
+                    }}
+                    className="bg-black text-white px-4 py-2 rounded-lg font-bold uppercase text-xs hover:bg-gray-800 transition-colors"
+                  >
+                    Add
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {ingredients.length === 0 && <span className="text-xs text-gray-500 font-medium">No ingredients added yet.</span>}
+                  {ingredients.map((ing, idx) => (
+                    <span key={idx} className="bg-theme-green/20 text-theme-green-deep border border-theme-green px-2 py-1 rounded-md text-xs font-bold flex items-center gap-1">
+                      {ing}
+                      <button onClick={() => setIngredients(ingredients.filter((_, i) => i !== idx))} className="hover:text-black ml-1">
+                        <X size={12} strokeWidth={3} />
+                      </button>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <button 
+                onClick={() => setShowIngredientsInput(true)}
+                className="w-full bg-theme-yellow hover:bg-[#e0c441] text-theme-ink font-black py-4 rounded-xl flex items-center justify-center gap-2 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[1px] hover:translate-x-[1px] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] transition-all uppercase tracking-widest text-xs mb-6"
+              >
+                + Add Raw Ingredients
+              </button>
+            )}
             
             <Button onClick={handleSave} className="w-full bg-theme-green hover:bg-theme-green-deep text-white font-black py-6 rounded-xl flex items-center justify-center gap-2 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all uppercase tracking-widest text-xs">
               <Save size={18} strokeWidth={3} /> Save Meal
