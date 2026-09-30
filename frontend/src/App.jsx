@@ -15,6 +15,7 @@ import { InventoryManagement } from "./pages/InventoryManagement"
 import { MassiveTextBlock } from "./components/ui/massive-text-block"
 import ScrollRevealParagraph from "./components/smoothui/scroll-reveal-paragraph"
 import { TypingAnimation } from "./components/ui/typing-animation"
+import DriftWall from "./components/ui/DriftWall"
 
 const hoverItems = [
   {
@@ -28,18 +29,6 @@ const hoverItems = [
     sublabel: "IOT SENSORS",
     description: "Track food freshness and detect surplus in real-time.",
     component: <InventoryManagement />,
-  },
-  {
-    label: "Smart Routing",
-    sublabel: "ALGORITHMIC MATCHING",
-    description: "Connect excess supply with verified NGOs instantly.",
-    image: "/images/hq_smart_routing.jpg",
-  },
-  {
-    label: "Seamless Logistics",
-    sublabel: "REDISTRIBUTION",
-    description: "Coordinate rapid pickups through automated alerts.",
-    image: "https://images.unsplash.com/photo-1587293852726-0e37bc0570b2?q=80&w=2000&auto=format&fit=crop", // Colorful boxes
   },
   {
     label: "Track Impact",
@@ -88,24 +77,65 @@ function App() {
     <div className="min-h-screen font-sans selection:bg-theme-green selection:text-white">
       <Navbar />
       <main className="flex-1 flex flex-col w-full">
-        
+
         {/* HERO SECTION */}
-        <section className="w-full bg-theme-green text-white pt-32 pb-32 px-4 relative overflow-hidden">
+        <section className="w-full bg-theme-green text-white pt-32 pb-32 px-4 relative overflow-hidden flex items-center min-h-[90vh]">
           <BackgroundGrid className="absolute inset-0 z-0 opacity-70" strokeClass="stroke-black/30" />
-          <div className="text-center space-y-10 max-w-4xl mx-auto relative z-10 w-full">
-            <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-bold font-serif leading-tight tracking-tight text-white flex flex-col items-center gap-0">
-              <span className="block">Prevent waste.</span>
-              <span className="block">Feed communities.</span>
-              <span className="text-theme-yellow block">
-                <FadeThrough phrases={["Faster.", "Smarter.", "At Scale.", "Together."]} />
-              </span>
-            </h1>
-            <ScrollRevealParagraph 
-              paragraph="Don't just manage surplus. Predict it. The AI platform connecting kitchens with verified NGOs to end food waste."
-              className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-medium leading-relaxed"
-            />
-            
-            <div className="mt-24 w-full max-w-6xl mx-auto text-left">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto relative z-10 w-full">
+            {/* Left Content */}
+            <div className="text-left space-y-6 lg:space-y-8">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-serif leading-tight tracking-tight text-white flex flex-col items-start gap-1">
+                <span className="block">Prevent waste.</span>
+                <span className="block">Feed communities.</span>
+                <span className="text-theme-yellow block">
+                  <FadeThrough phrases={["Faster.", "Smarter.", "At Scale.", "Together."]} />
+                </span>
+              </h1>
+              <ScrollRevealParagraph
+                paragraph="Don't just manage surplus. Predict it. The AI platform connecting kitchens with verified NGOs to end food waste."
+                className="text-lg md:text-xl text-white/80 font-medium leading-relaxed max-w-lg"
+              />
+            </div>
+
+            {/* Right Content: DriftWall */}
+            <div className="w-full h-[400px] lg:h-[480px] relative overflow-hidden border-[12px] border-l-0 border-[#1f3025] rounded-[2rem] shadow-xl">
+              <DriftWall
+                items={[
+                  { image: '/images/biofuel/journey.jpg', title: 'Journey' },
+                  { image: '/images/img1.jpg', title: 'Kitchen' },
+                  { image: '/images/img2.jpg', title: 'Surplus' },
+                  { image: '/images/img3.jpg', title: 'Network' },
+                  { image: '/images/compost/kitchen-collection.jpg', title: 'Collection' },
+                  { image: '/images/compost/decomposition-stage.jpg', title: 'Composting' },
+                  { image: '/images/biofuel/cooking.jpg', title: 'Biofuel' },
+                  { image: '/images/compost/harvesting.jpg', title: 'Harvesting' },
+                  { image: '/images/biofuel/digester.jpg', title: 'Processing' }
+                ]}
+                columns={3}
+                tileWidth={160}
+                tileHeight={110}
+                gap={16}
+                tilt={16}
+                turn={-14}
+                perspective={1200}
+                depth={120}
+                speed={42}
+                direction="up"
+                variance={0.45}
+                parallax={0.6}
+                lift={64}
+                fade={0.6}
+                dim={1}
+                overlayColor="#000000"
+                radius={14}
+                roll={0}
+                pauseOnHover={false}
+                grayscale={false}
+              />
+            </div>
+
+            <div className="mt-8 lg:mt-16 w-full text-left lg:col-span-2">
               <HoverExpand items={hoverItems} />
             </div>
           </div>
@@ -115,7 +145,7 @@ function App() {
         <section className="w-full bg-theme-sage text-theme-ink relative">
           <BackgroundGrid className="absolute inset-0 z-0 opacity-40" strokeClass="stroke-theme-ink/15" />
           <div className="relative z-10">
-            <MassiveTextBlock 
+            <MassiveTextBlock
               number="01"
               title="Platform Overview"
               heading="The complete AI + IoT redistribution ecosystem."
@@ -134,7 +164,7 @@ function App() {
         <section className="w-full bg-theme-paper text-theme-ink relative overflow-hidden">
           <BackgroundGrid className="absolute inset-0 z-0 opacity-40" strokeClass="stroke-theme-ink/15" />
           <div className="relative z-10">
-            <MassiveTextBlock 
+            <MassiveTextBlock
               number="02"
               title="Kitchen & Institution Portal"
               heading="Total control from procurement to plate."
@@ -150,7 +180,7 @@ function App() {
         <section className="w-full bg-theme-sage text-theme-ink pb-10 relative overflow-hidden">
           <BackgroundGrid className="absolute inset-0 z-0 opacity-40" strokeClass="stroke-theme-ink/15" />
           <div className="relative z-10">
-            <MassiveTextBlock 
+            <MassiveTextBlock
               number="03"
               title="NGO & Recipient Network"
               heading="Bridging the gap between surplus and scarcity."
@@ -168,7 +198,7 @@ function App() {
             <p className="text-theme-sage font-bold tracking-[0.2em] uppercase text-sm mb-8">
               Ready to take control?
             </p>
-            
+
             <div className="w-full max-w-4xl mx-auto mb-10 border border-white/20 grid grid-cols-3 divide-x divide-white/20 bg-black/10">
               <div className="flex flex-col items-center justify-center py-6 md:py-8 px-4 text-center hover:bg-white/5 transition-colors">
                 <KineticText text="UNDERSTAND" className="text-2xl md:text-4xl text-white tracking-tighter mb-2 font-sans" />
@@ -208,7 +238,7 @@ function App() {
               </svg>
             </div>
 
-            <ScrollRevealParagraph 
+            <ScrollRevealParagraph
               paragraph="One platform to track your kitchen's surplus, analyze waste, and feed communities."
               className="text-theme-sage/80 text-lg md:text-xl mt-4 mb-10 max-w-2xl mx-auto font-medium"
             />

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { categorizedInventoryData } from "../data/mockData";
 import GlowHover from "../components/smoothui/glow-hover-card";
 import ScrollableCardStack from "../components/smoothui/scrollable-card-stack";
-import { Package, AlertCircle, CheckCircle2, Leaf, Wheat, Droplets, EggFried, X, Sparkles } from "lucide-react";
+import { Package, AlertCircle, CheckCircle2, Leaf, Wheat, Droplets, EggFried, X, Sparkles, Thermometer } from "lucide-react";
 
 export function InventoryManagement() {
   const [inventoryData, setInventoryData] = useState(categorizedInventoryData);
   const [activeCategory, setActiveCategory] = useState(null);
   const [activeStackIndex, setActiveStackIndex] = useState(0);
   const [isAddingItem, setIsAddingItem] = useState(false);
+  const [showStorageConditions, setShowStorageConditions] = useState(false);
 
   const totalInventoryValue = inventoryData.reduce((total, category) => {
     return total + category.items.reduce((catTotal, item) => {
@@ -36,10 +37,18 @@ export function InventoryManagement() {
 
   return (
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 pb-12">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <h1 className="text-2xl font-black text-[#1f3025] uppercase tracking-wider">Inventory Hub</h1>
-        <div className="bg-[#1f3025] border border-white/10 px-4 py-2 rounded-xl text-[10px] font-bold text-white/60 uppercase tracking-widest shadow-inner hidden md:block">
-          Total Categories: {inventoryData.length}
+        <div className="flex items-center gap-4">
+          <button 
+            onClick={() => setShowStorageConditions(true)}
+            className="bg-[#1f3025] hover:bg-[#2a3d31] text-[#b9e7aa] border border-[#b9e7aa]/30 px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-colors flex items-center gap-2"
+          >
+            <Thermometer size={14} /> Storage Conditions
+          </button>
+          <div className="bg-[#1f3025] border border-white/10 px-4 py-2 rounded-xl text-[10px] font-bold text-white/60 uppercase tracking-widest shadow-inner hidden md:block">
+            Total Categories: {inventoryData.length}
+          </div>
         </div>
       </div>
       
@@ -315,7 +324,78 @@ export function InventoryManagement() {
             Manage All Suppliers &rarr;
           </button>
         </div>
+      </div>
+    
+      {/* Storage Conditions Modal */}
+      {showStorageConditions && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#1f3025] border border-[#b9e7aa]/30 p-8 rounded-3xl max-w-2xl w-full shadow-2xl relative">
+            <button 
+              onClick={() => setShowStorageConditions(false)}
+              className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
+            >
+              <X size={24} />
+            </button>
+            <h2 className="text-xl font-black text-white uppercase tracking-widest mb-6">Storage Conditions</h2>
+            
+            <div className="flex flex-col gap-4">
+              {/* Inventory A */}
+              <div className="bg-[#2a3d31] p-5 rounded-2xl border border-white/10 flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">Inventory A</h3>
+                  <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Grains & Millets</p>
+                </div>
+                <div className="flex gap-6">
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Temp</span>
+                    <span className="text-[#b9e7aa] font-black text-lg">22°C</span>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Humidity</span>
+                    <span className="text-[#4caf50] font-black text-lg">45%</span>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Inventory B */}
+              <div className="bg-[#2a3d31] p-5 rounded-2xl border border-white/10 flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">Inventory B</h3>
+                  <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Vegetables & Fruits</p>
+                </div>
+                <div className="flex gap-6">
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Temp</span>
+                    <span className="text-[#b9e7aa] font-black text-lg">4°C</span>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Humidity</span>
+                    <span className="text-[#4caf50] font-black text-lg">85%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Inventory C */}
+              <div className="bg-[#2a3d31] p-5 rounded-2xl border border-white/10 flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-bold text-white uppercase tracking-wider">Inventory C</h3>
+                  <p className="text-white/60 text-xs font-bold uppercase tracking-widest mt-1">Dairy & Meat</p>
+                </div>
+                <div className="flex gap-6">
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Temp</span>
+                    <span className="text-[#ff3399] font-black text-lg">-2°C</span>
+                  </div>
+                  <div className="flex flex-col items-end">
+                    <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">Humidity</span>
+                    <span className="text-[#4caf50] font-black text-lg">60%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+      )}
+  </div>
   );
 }
