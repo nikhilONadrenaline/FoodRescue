@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Package, TrendingUp, AlertTriangle, CheckCircle, Clock, Search, FileText, HandHeart, Thermometer, BrainCircuit, Zap, ArrowRight, Recycle, PackageOpen } from "lucide-react";
+import { Package, TrendingUp, AlertTriangle, CheckCircle, Clock, Search, FileText, HandHeart, Thermometer, BrainCircuit, Zap, ArrowRight, Recycle, PackageOpen, ChefHat } from "lucide-react";
 import { AnimatedList } from "../../components/animata/animated-list";
 import { dashboardInventoryData, aiPredictionData, aiPredictionPerItem } from "../data/mockData";
 import { Button } from "../components/ui/button";
@@ -171,6 +171,21 @@ function MultiSegmentDonutChart({ data, size = 240, circleWidth = 24 }) {
 export function KitchenDashboard() {
   const [items, setItems] = useState(dashboardInventoryData);
   const [isDataEntered, setIsDataEntered] = useState(false);
+  const [todaysPlanning, setTodaysPlanning] = useState(null);
+
+  useEffect(() => {
+    const loadPlanning = () => {
+      const stored = localStorage.getItem('todaysPlanning');
+      if (stored) {
+        try {
+          setTodaysPlanning(JSON.parse(stored));
+        } catch(e){}
+      }
+    };
+    loadPlanning();
+    window.addEventListener('storage', loadPlanning);
+    return () => window.removeEventListener('storage', loadPlanning);
+  }, []);
   const initialFormData = aiPredictionPerItem.reduce((acc, item) => {
     acc[item.id] = { preparedFood: '', consumedFood: '', distributedToNGOs: '', waste: '' };
     return acc;
@@ -246,6 +261,34 @@ export function KitchenDashboard() {
           TODAYS PLANNING :<span className="animate-pulse ml-1">-</span>
         </h1>
       </div>
+
+      {todaysPlanning && todaysPlanning.length > 0 && (
+        <div className="w-full flex flex-col gap-6 mt-[-1rem] mb-4">
+          <p className="text-xs font-black uppercase tracking-widest text-black/60 mb-[-1rem]">Generated Menu</p>
+          {todaysPlanning.map((dish, i) => (
+            <div key={i} className="w-full bg-theme-yellow border-4 border-black rounded-3xl p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-4 opacity-10 text-black transform group-hover:scale-110 transition-transform">
+                   <ChefHat size={120} />
+                </div>
+                <div className="relative z-10">
+                    <h2 className="text-3xl font-black text-black uppercase tracking-widest">{dish.name}</h2>
+                    <p className="text-sm font-bold text-black/70 mt-1">Total Quantity: {dish.quantity}</p>
+                </div>
+                
+                <div className="relative z-10 w-full md:w-auto flex-1 md:max-w-md bg-white border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="text-[10px] font-black uppercase tracking-widest text-black/50 mb-2">Raw Materials Required</p>
+                    <div className="flex flex-wrap gap-2">
+                        {dish.ingredients && dish.ingredients.map((ing, idx) => (
+                            <span key={idx} className="text-xs font-bold bg-theme-cream border border-black px-2 py-1 rounded-md shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                                {ing.quantity} {ing.name}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Top Row: Main Dashboard Data */}
       <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-32 w-full">

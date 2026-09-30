@@ -7,7 +7,6 @@ export const dashboardInventoryData = [
   { id: "meal3", name: "Vegetable Curry", amount: "150 kg", percentage: 12, colorHex: "#ff3399" },
   { id: "meal4", name: "Pasta with Tomato Sauce", amount: "120 kg", percentage: 10, colorHex: "#4caf50" },
   { id: "meal5", name: "Lentil Soup", amount: "100 kg", percentage: 8, colorHex: "#ff9800" },
-  { id: "meal6", name: "Beef Stew", amount: "90 kg", percentage: 7, colorHex: "#795548" },
   { id: "meal7", name: "Pancakes", amount: "80 kg", percentage: 7, colorHex: "#e0e0e0" },
   { id: "meal8", name: "Salad Bowl", amount: "50 kg", percentage: 4, colorHex: "#9c27b0" },
 ];
