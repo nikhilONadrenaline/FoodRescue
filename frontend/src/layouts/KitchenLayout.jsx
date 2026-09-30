@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { Button } from "../components/ui/button";
-import { LayoutDashboard, Package, TrendingUp, HandHeart, X, Trash2, Bell, AlertTriangle, Recycle } from "lucide-react";
+import { LayoutDashboard, Package, TrendingUp, HandHeart, X, Trash2, Bell, AlertTriangle, Calendar, Recycle } from "lucide-react";
 import gsap from "gsap";
 import { inventoryWarningsData } from "../data/mockData";
 import { SidebarToggleIcon } from "../components/ui/sidebar-toggle-icon";
@@ -17,6 +17,7 @@ export function KitchenLayout() {
 
   const navigation = [
     { name: "Dashboard", href: "/kitchen", icon: LayoutDashboard },
+    { name: "Meal Planner", href: "/kitchen/meal-planner", icon: Calendar },
     { name: "Inventory Management", href: "/kitchen/inventory", icon: Package },
     { name: "Expenditure & Analytics", href: "/kitchen/expenditure", icon: TrendingUp },
     { name: "Surplus & NGO Network", href: "/kitchen/surplus", icon: HandHeart },

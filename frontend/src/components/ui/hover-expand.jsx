@@ -15,7 +15,7 @@ export function HoverExpand({
   const setHoveredIndex = React_useState;
 
   return (
-    <div className={cn("flex flex-col w-full gap-6 md:gap-8", className)}>
+    <div className={cn("flex flex-col w-full", className)}>
       {items.map((item, i) => {
         const isHovered = hoveredIndex === i;
         const isOtherHovered = hoveredIndex !== null && !isHovered;

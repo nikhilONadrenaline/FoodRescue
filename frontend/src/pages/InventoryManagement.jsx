@@ -37,7 +37,7 @@ export function InventoryManagement() {
   return (
     <div className="max-w-7xl mx-auto w-full flex flex-col gap-8 pb-12">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-black text-white uppercase tracking-wider">Inventory Hub</h1>
+        <h1 className="text-2xl font-black text-[#1f3025] uppercase tracking-wider">Inventory Hub</h1>
         <div className="bg-[#1f3025] border border-white/10 px-4 py-2 rounded-xl text-[10px] font-bold text-white/60 uppercase tracking-widest shadow-inner hidden md:block">
           Total Categories: {inventoryData.length}
         </div>

@@ -238,8 +238,14 @@ export function KitchenDashboard() {
   }, []);
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-12 pb-12 px-6">
+    <div className="w-full max-w-[1200px] mx-auto flex flex-col gap-12 pb-12 px-6 pt-8">
 
+      {/* Page Header */}
+      <div className="w-full text-left">
+        <h1 className="text-[#1f3025] text-3xl md:text-4xl font-black uppercase tracking-widest flex items-center">
+          TODAYS PLANNING :<span className="animate-pulse ml-1">-</span>
+        </h1>
+      </div>
 
       {/* Top Row: Main Dashboard Data */}
       <div className="flex flex-col lg:flex-row justify-center gap-16 lg:gap-32 w-full">
@@ -303,57 +309,57 @@ export function KitchenDashboard() {
 
       {/* Full Width Bottom Row: AI Prediction vs Actual Tracker */}
       <div className="w-full flex flex-col gap-6">
-        <h2 className="text-white/60 text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-2">
+        <h2 className="text-[#1f3025] text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-2">
           <Zap size={18} className="text-[#b9e7aa]" /> AI Demand Forecast Analysis
         </h2>
 
         {aiPredictionPerItem.map(item => (
-          <div key={item.id} className="bg-[#1f3025] border border-white/10 rounded-3xl p-6 shadow-xl flex flex-col md:flex-row md:items-center relative overflow-hidden gap-8">
-            <div className="absolute top-0 right-0 md:right-auto md:left-1/2 p-4 opacity-5 text-[#b9e7aa] transform md:-translate-x-1/2 md:scale-150"><BrainCircuit size={120} /></div>
+          <div key={item.id} className="bg-[#1f3025] border border-white/10 rounded-2xl p-3 shadow-xl flex flex-col md:flex-row md:items-center relative overflow-hidden gap-4">
+            <div className="absolute top-0 right-0 md:right-auto md:left-1/2 p-2 opacity-5 text-[#b9e7aa] transform md:-translate-x-1/2 md:scale-110"><BrainCircuit size={60} /></div>
 
             {/* Left Side: Stats */}
             <div className="flex-1 relative z-10 flex flex-col justify-center">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-3 h-3 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.2)]" style={{ backgroundColor: item.colorHex }}></div>
-                <h3 className="text-white font-black text-xl uppercase tracking-widest">{item.name}</h3>
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-2 h-2 rounded-full shadow-[0_0_5px_rgba(255,255,255,0.2)]" style={{ backgroundColor: item.colorHex }}></div>
+                <h3 className="text-white font-black text-sm uppercase tracking-widest">{item.name}</h3>
               </div>
 
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-1">
                 <div>
-                  <p className="text-[10px] text-white/60 uppercase tracking-widest font-bold mb-2">Prepared Food</p>
-                  <p className="text-4xl font-black text-white">{item.actualPrepared} <span className="text-sm text-white/60">kg</span></p>
+                  <p className="text-[8px] text-white/60 uppercase tracking-widest font-bold mb-0.5">Prepared Food</p>
+                  <p className="text-xl font-black text-white">{item.actualPrepared} <span className="text-[10px] text-white/60">kg</span></p>
                 </div>
-                <div className="w-px h-12 bg-[#333] mx-4"></div>
+                <div className="w-px h-6 bg-[#333] mx-2"></div>
                 <div className="text-right">
-                  <p className="text-[10px] text-[#b9e7aa]/60 uppercase tracking-widest font-bold mb-2">AI Predicted Demand</p>
-                  <p className="text-4xl font-black text-[#b9e7aa]">{item.aiPredicted} <span className="text-sm text-[#b9e7aa]/50">kg</span></p>
+                  <p className="text-[8px] text-[#b9e7aa]/60 uppercase tracking-widest font-bold mb-0.5">AI Predicted Demand</p>
+                  <p className="text-xl font-black text-[#b9e7aa]">{item.aiPredicted} <span className="text-[10px] text-[#b9e7aa]/50">kg</span></p>
                 </div>
               </div>
             </div>
 
             {/* Right Side: Funnel/Flow Visualization */}
             <div className="flex-1 relative z-10">
-              <div className="bg-[#2a3d31] rounded-3xl p-5 border border-white/10 h-full flex flex-col justify-center">
-                <div className="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
-                  <span className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Predicted Surplus (Buffer)</span>
-                  <span className="text-[#f1d85a] font-black text-xl">{item.predictedSurplus} kg</span>
+              <div className="bg-[#2a3d31] rounded-xl p-2 border border-white/10 h-full flex flex-col justify-center">
+                <div className="flex justify-between items-center mb-2 border-b border-white/10 pb-1.5">
+                  <span className="text-[8px] text-white/60 uppercase tracking-widest font-bold">Predicted Surplus (Buffer)</span>
+                  <span className="text-[#f1d85a] font-black text-sm">{item.predictedSurplus} kg</span>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   {/* NGO Split */}
-                  <div className="flex-1 bg-[#b9e7aa]/10 border border-theme-green/30 rounded-xl p-4 flex flex-col justify-center items-center group hover:bg-[#b9e7aa]/20 transition-colors">
-                    <PackageOpen size={20} className="text-[#b9e7aa] mb-2" />
-                    <span className="text-[9px] uppercase tracking-widest text-[#b9e7aa]/80 font-bold text-center leading-tight">To NGO Network</span>
-                    <span className="text-[#b9e7aa] font-black text-2xl mt-1">{item.remainingFood} <span className="text-xs">kg</span></span>
+                  <div className="flex-1 bg-[#b9e7aa]/10 border border-theme-green/30 rounded-lg p-1.5 flex flex-col justify-center items-center group hover:bg-[#b9e7aa]/20 transition-colors">
+                    <PackageOpen size={12} className="text-[#b9e7aa] mb-1" />
+                    <span className="text-[7px] uppercase tracking-widest text-[#b9e7aa]/80 font-bold text-center leading-tight">To NGO Network</span>
+                    <span className="text-[#b9e7aa] font-black text-sm mt-0.5">{item.remainingFood} <span className="text-[8px]">kg</span></span>
                   </div>
 
-                  <ArrowRight size={20} className="text-[#333] shrink-0" />
+                  <ArrowRight size={12} className="text-[#333] shrink-0" />
 
                   {/* Waste Split */}
-                  <div className="flex-1 bg-[#ff3399]/10 border border-[#ff3399]/30 rounded-xl p-4 flex flex-col justify-center items-center group hover:bg-[#ff3399]/20 transition-colors">
-                    <Recycle size={20} className="text-[#ff3399] mb-2" />
-                    <span className="text-[9px] uppercase tracking-widest text-[#ff3399]/80 font-bold text-center leading-tight">To Waste</span>
-                    <span className="text-[#ff3399] font-black text-2xl mt-1">{item.actualWaste} <span className="text-xs">kg</span></span>
+                  <div className="flex-1 bg-[#ff3399]/10 border border-[#ff3399]/30 rounded-lg p-1.5 flex flex-col justify-center items-center group hover:bg-[#ff3399]/20 transition-colors">
+                    <Recycle size={12} className="text-[#ff3399] mb-1" />
+                    <span className="text-[7px] uppercase tracking-widest text-[#ff3399]/80 font-bold text-center leading-tight">To Waste</span>
+                    <span className="text-[#ff3399] font-black text-sm mt-0.5">{item.actualWaste} <span className="text-[8px]">kg</span></span>
                   </div>
                 </div>
               </div>
@@ -444,7 +450,7 @@ export function KitchenDashboard() {
           </div>
         ) : (
           <div className="w-full flex flex-col gap-6 animate-in slide-in-from-bottom-8 fade-in duration-1000">
-            <h2 className="text-white/60 text-sm font-bold uppercase tracking-widest flex items-center gap-3">
+            <h2 className="text-[#1f3025] text-sm font-bold uppercase tracking-widest flex items-center gap-3">
               <Thermometer size={18} className="text-[#b9e7aa]-deep" /> Actual Daily Production Summary
             </h2>
 
@@ -514,7 +520,7 @@ export function KitchenDashboard() {
       {/* AI vs Actual Comparison Feature (Appears after data entry) */}
       {isDataEntered && (
         <div className="w-full relative mt-6 animate-in slide-in-from-bottom-8 fade-in duration-1000 flex flex-col gap-6">
-          <h2 className="text-white/60 text-sm font-bold uppercase tracking-widest flex items-center gap-3">
+          <h2 className="text-[#1f3025] text-sm font-bold uppercase tracking-widest flex items-center gap-3">
             <BrainCircuit size={18} className="text-[#b9e7aa]" /> AI vs Actual Performance Insights (Per Item)
           </h2>
 
@@ -606,7 +612,7 @@ export function KitchenDashboard() {
           <BrainCircuit size={160} />
         </div>
 
-        <h2 className="text-white/80 text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-6 relative z-10">
+        <h2 className="text-[#1f3025] text-sm font-bold uppercase tracking-widest flex items-center gap-3 mb-6 relative z-10">
           <BrainCircuit size={18} className="text-[#b9e7aa]" /> AI Action Center
         </h2>
 
